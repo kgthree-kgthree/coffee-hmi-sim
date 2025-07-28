@@ -7,7 +7,6 @@
 
 #coffee_state_machine.py
 
-
 from enum import Enum, auto
 
 class CoffeeState(Enum):
@@ -22,24 +21,31 @@ class CoffeeMachineFSM:
         self.state = CoffeeState.IDLE
 
     def start_brew(self, drink):
-        if self.state = CoffeeState.IDLE :
-            self.state = HEATING
-            return "Heating..."
+        if self.state == CoffeeState.IDLE :
+            self.state = CoffeeState.HEATING
+            return f"Starting {drink}: Heating..."
+        return f"Cannot start. Current state:{self.state.name}"
     
 
     def brew(self, drink):
-        self.state = CoffeeState.BREWING
-        return "Brewing. . ."
+        if self.state == CoffeeState.HEATING:
+            self.state = CoffeeState.BREWING
+            return f"{drink} is Brewing. . ."
+        return f"Cannot brew. Current state: {self.state.name}"
 
     def complete(self, drink):
-        self.state = CoffeeState.COMPLETE
-        return "ready!"
+        if self.state == CoffeeState.BREWING:
+            self.state = CoffeeState.COMPLETE
+            return f"{drink} is Ready!"
+        return f"Cannot complete. Current state: {self.state.name}"
 
     def reset(self):
-        self.state = CoffeeState.IDLE
-        return "Idle"
+        if self.state == CoffeeState.COMPLETE:
+            self.state = CoffeeState.IDLE
+            return "Machine Reset to Idle!"
+        return f"Cannot reset. Current state: {self.state.name}"
 
-    def get_state(self)
+    def get_state(self):
         return self.state.name
 
         
