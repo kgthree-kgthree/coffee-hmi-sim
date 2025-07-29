@@ -42,10 +42,8 @@ class CoffeeMachineFSM:
     def reset(self):
         if self.state == CoffeeState.COMPLETE:
             self.state = CoffeeState.IDLE
-            return "Machine Reset to Idle!"
+            return "Click to select drink!"
         return f"Cannot reset. Current state: {self.state.name}"
 
     def get_state(self):
         return self.state.name
-
-        
